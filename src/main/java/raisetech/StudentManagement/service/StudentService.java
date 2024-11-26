@@ -29,22 +29,22 @@ public class StudentService {
 
     }
 
-    /**
-     * 年齢が30代の受講生を取得します。
-     *
-     * @return 年齢が30代の受講生一覧
-     */
-
-    // 30代以上の学生を抽出するメソッド
-    public List<Student> searchStudentsInTheirThirtiesOrOlder() {
-        // 全学生を取得し、年齢が30歳以上の学生のみを抽出
-        return repository.search().stream()
-                .filter(student -> student.getAge() >= 30)  // 年齢が30歳以上の学生をフィルタリング
-                .collect(Collectors.toList());              // フィルタリング後のリストを返す
-    }
-
-    // "Python" を含むコースを抽出
-    public List<StudentsCourses> searchByName(String keyword) {
-        return repository.searchByName(keyword);
-    }
+//    /**
+//     * 年齢が30代の受講生を取得します。
+//     *
+//     * @return 年齢が30代の受講生一覧
+//     */
+//
+//     30代以上の学生を抽出するメソッド
+//    public List<Student> searchStudentsInTheirThirtiesOrOlder() {
+//         全学生を取得し、年齢が30歳以上の学生のみを抽出
+//        return repository.search().stream()
+//                .filter(student -> student.getAge() >= 30)  // 年齢が30歳以上の学生をフィルタリング
+//                .collect(Collectors.toList());              // フィルタリング後のリストを返す
+//    }
+//
+//     "Python" を含むコースを抽出
+//    public List<StudentsCourses> searchByName(String keyword) {
+//        return repository.searchByName(keyword);
+//    }
 }
