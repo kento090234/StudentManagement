@@ -33,6 +33,8 @@ public class StudentController {
         List<StudentsCourses> studentsCourses = studentService.searchStudentsCoursesList();
 
         return converter.convertStudentDetails(students, studentsCourses);
+//    public List<Student> getStudentList() {
+//        return studentService.searchStudentList();
     }
 
 
