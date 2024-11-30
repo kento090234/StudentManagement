@@ -20,7 +20,7 @@ public class StudentService {
 
 
     public List<Student> searchStudentList() {
-        //ここで何かしらの処理を行う
+
         return repository.search();
     }
 

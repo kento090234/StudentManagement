@@ -46,29 +46,3 @@ public interface StudentRepository {
     @Select("SELECT * FROM students_courses WHERE courses_name LIKE CONCAT('%', #{keyword}, '%')")
     List<StudentsCourses>searchByName(String keyword);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
