@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class Studentconverter {
+public class StudentConverter {
     public List<StudentDetail> convertStudentDetails(List<Student> students, List<StudentsCourses> studentsCourses) {
         List<StudentDetail> studentDetails = new ArrayList<>();
         students.forEach(student -> {
@@ -25,7 +25,7 @@ public class Studentconverter {
 
             // remark と isDeleted を設定
             studentDetail.setRemark(student.getRemark());        // remark をセット
-            studentDetail.setDeleted(student.isDeleted());       // isDeleted をセット
+//            studentDetail.setDeleted(student.isDeleted());       // isDeleted をセット
 
             studentDetails.add(studentDetail);
         });

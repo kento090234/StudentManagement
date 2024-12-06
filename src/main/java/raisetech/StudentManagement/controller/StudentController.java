@@ -1,9 +1,10 @@
 package raisetech.studentmanagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import raisetech.studentmanagement.controller.converter.Studentconverter;
+import raisetech.studentmanagement.controller.converter.StudentConverter;
 import raisetech.studentmanagement.domain.StudentDetail;
 import raisetech.studentmanagement.service.StudentService;
 import raisetech.studentmanagement.data.Student;
@@ -13,26 +14,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/students")
+@Controller
 public class StudentController {
 
     private StudentService studentService;  // インスタンス変数として StudentService を宣言
-    private Studentconverter converter;
+    private StudentConverter converter;
 
     @Autowired
-    public StudentController(StudentService studentService, Studentconverter converter) {
+    public StudentController(StudentService studentService, StudentConverter converter) {
         this.studentService = studentService;
         this.converter = converter;
     }
 
 
     @GetMapping("/studentList")
-    public List<StudentDetail> getStudentList() {
+    public String getStudentList(Model model) {
         List<Student> students = studentService.searchStudentList();
         List<StudentsCourses> studentsCourses = studentService.searchStudentsCoursesList();
 
-        return converter.convertStudentDetails(students, studentsCourses);
+        model.addAttribute("studentList" , converter.convertStudentDetails(students, studentsCourses));
+        return "studentList";
 //    public List<Student> getStudentList() {
 //        return studentService.searchStudentList();
     }
