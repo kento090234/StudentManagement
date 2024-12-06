@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class StudentManagementApplication {
+public class StudentmanagementApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StudentManagementApplication.class, args);
+		SpringApplication.run(StudentmanagementApplication.class, args);
 	}
 
 
