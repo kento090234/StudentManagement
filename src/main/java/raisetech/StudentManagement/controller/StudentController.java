@@ -1,14 +1,14 @@
-package raisetech.studentmanagement.controller;
+package raisetech.StudentManagement.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import raisetech.studentmanagement.controller.converter.StudentConverter;
-import raisetech.studentmanagement.domain.StudentDetail;
-import raisetech.studentmanagement.service.StudentService;
-import raisetech.studentmanagement.data.Student;
-import raisetech.studentmanagement.data.StudentsCourses;
+import raisetech.StudentManagement.controller.converter.StudentConverter;
+import raisetech.StudentManagement.domain.StudentDetail;
+import raisetech.StudentManagement.service.StudentService;
+import raisetech.StudentManagement.data.Student;
+import raisetech.StudentManagement.data.StudentsCourses;
 
 import java.util.ArrayList;
 import java.util.List;

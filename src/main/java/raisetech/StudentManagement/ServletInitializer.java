@@ -1,8 +1,8 @@
-package raisetech.studentmanagement;
+package raisetech.StudentManagement;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import raisetech.studentmanagement.StudentManagementApplication;
+import raisetech.StudentManagement.StudentManagementApplication;
 
 public class ServletInitializer extends SpringBootServletInitializer {
 
