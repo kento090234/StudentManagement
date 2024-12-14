@@ -1,6 +1,8 @@
 package  raisetech.StudentManagement.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.repository.StudentRepository;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
@@ -29,6 +31,15 @@ public class StudentService {
 
     }
 
+    @Transactional
+    public void registerStudent(StudentDetail studentDetail) {
+        repository.registerStudent(studentDetail.getStudent());
+//      TODO:コース情報登録も行う
+    }
+}
+
+
+
 //    /**
 //     * 年齢が30代の受講生を取得します。
 //     *
@@ -47,4 +58,3 @@ public class StudentService {
 //    public List<StudentsCourses> searchByName(String keyword) {
 //        return repository.searchByName(keyword);
 //    }
-}

@@ -1,34 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thmeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>受講生情報一覧</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
 <h1>受講生一覧</h1>
-<table bgcolor="1">
-  <thead>
-  <tr>
-      <th>ID</th>
-      <th>名前</th>
-      <th>カナ名</th>
-      <th>ニックネーム</th>
-      <th>メールアドレス</th>
-      <th>地域</th>
-      <th>年齢</th>
-      <th>性別</th>
-      <th>備考</th>
-  </tr>
-  </thead>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>カナ名</th>
+        <th>ニックネーム</th>
+        <th>メールアドレス</th>
+        <th>地域</th>
+        <th>年齢</th>
+        <th>性別</th>
+        <th>備考</th>
+    </tr>
+    </thead>
     <tbody>
     <tr th:each="studentDetail : ${studentList}">
-  <td th:text="${studentDetail.student.id}">1</td>
-  <td th:text="${studentDetail.student.name}">吉田正尚</td>
-  <td th:text="${studentDetail.student.fullname}">ヨシダマサタカ</td>
-  <td th:text="${studentDetail.student.nickname}">マサタカ</td>
-  <td th:text="${studentDetail.student.emailAddress}">Masataka@7.com</td>
-  <td th:text="${studentDetail.student.address}">ロンドン</td>
-  <td th:text="${studentDetail.student.age}">31</td>
-  <td th:text="${studentDetail.student.gender}">特になし</td>
+        <td th:text="${studentDetail.id}">1</td>
+        <td th:text="${studentDetail.name}">吉田正尚</td>
+        <td th:text="${studentDetail.fullname}">ヨシダマサタカ</td>
+        <td th:text="${studentDetail.nickname}">マサタカ</td>
+        <td th:text="${studentDetail.emailAddress}">Masataka@7.com</td>
+        <td th:text="${studentDetail.address}">ロンドン</td>
+        <td th:text="${studentDetail.age}">31</td>
+        <td th:text="${studentDetail.gender != null ? studentDetail.gender : '未指定'}">特になし</td>
+        <td th:text="${studentDetail.remarks}"></td>
     </tr>
     </tbody>
 </table>

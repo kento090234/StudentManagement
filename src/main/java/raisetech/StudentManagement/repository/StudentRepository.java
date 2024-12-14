@@ -29,20 +29,31 @@ public interface StudentRepository {
     @Select("SELECT * FROM students_courses")
     List<StudentsCourses> searchStudentsCourses();
 
-    /**
-     * 年齢が30代の受講生を取得します。
-     *
-     * @return 年齢が30代の受講生一覧
-     */
-    @Select("SELECT * FROM students WHERE age BETWEEN 30 AND 39")
-    List<Student> findStudentsInTheirThirties();
+    @Insert(
+            "INSERT INTO students(name, fullname, nickname, email_address, address, age, gender, remark, isDeleted) "
+      + "VALUES(#{name}, #{fullname}, #{nickname}, #{emailAddress}, #{address}, #{age}, #{gender}, #{remark}, false )")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void registerStudent(Student student);
 
-    /**
-     * 指定されたキーワードを含むコース名を検索します。
-     *
-     * @param keyword 検索するキーワード
-     * @return キーワードを含むコース情報のリスト
-     */
-    @Select("SELECT * FROM students_courses WHERE courses_name LIKE CONCAT('%', #{keyword}, '%')")
-    List<StudentsCourses>searchByName(String keyword);
+
+
+
+
+
+//    /**
+//     * 年齢が30代の受講生を取得します。
+//     *
+//     * @return 年齢が30代の受講生一覧
+//     */
+//    @Select("SELECT * FROM students WHERE age BETWEEN 30 AND 39")
+//    List<Student> findStudentsInTheirThirties();
+//
+//    /**
+//     * 指定されたキーワードを含むコース名を検索します。
+//     *
+//     * @param keyword 検索するキーワード
+//     * @return キーワードを含むコース情報のリスト
+//     */
+//    @Select("SELECT * FROM students_courses WHERE courses_name LIKE CONCAT('%', #{keyword}, '%')")
+//    List<StudentsCourses>searchByName(String keyword);
 }

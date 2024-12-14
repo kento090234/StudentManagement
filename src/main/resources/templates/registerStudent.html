@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>受講生登録</title>
+</head>
+<body>
+<h1>受講生登録</h1>
+<form th:action="@{/registerStudent}" th:object="${studentDetail}" method="post">
+    <div>
+        <label for="name">名前:</label>
+        <input type="text" id="name" th:field="*{student.name}" required />
+    </div>
+    <div>
+        <label for="name">フルネーム:</label>
+        <input type="text" id="fullname" th:field="*{student.fullname}" required />
+    </div>
+    <div>
+        <label for="name">ニックネーム:</label>
+        <input type="text" id="nickname" th:field="*{student.nickname}" required />
+    </div>
+    <div>
+        <label for="name">メールアドレス:</label>
+        <input type="text" id="emailAddress" th:field="*{student.emailAddress}" required />
+    </div>
+    <div>
+        <label for="name">地域:</label>
+        <input type="text" id="address" th:field="*{student.address}" required />
+    </div>
+    <div>
+        <label for="name">年齢:</label>
+        <input type="text" id="age" th:field="*{student.age}"  />
+    </div>
+    <div>
+        <label for="name">性別:</label>
+        <input type="text" id="gender" th:field="*{student.gender}"  />
+    </div>
+    <div>
+        <label for="name">備考:</label>
+        <input type="text" id="remark" th:field="*{student.remark}"  />
+    </div>
+    <div>
+        <button type="submit" class="buttonIcon">登録</button>
+    </div>
+</form>
+</body>
+</html>
+
