@@ -1,10 +1,12 @@
 package raisetech.StudentManagement.controller.converter;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domain.StudentDetail;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +21,7 @@ public class StudentConverter {
 
             // 関連するコースをフィルタリング
             List<StudentsCourses> convertStudentCourses = studentsCourses.stream()
-                    .filter(studentsCourse -> student.getId().equals(studentsCourse.getStudentId()))
+                    .filter(studentsCourse -> Integer.valueOf(student.getId()).equals(studentsCourse.getStudentId()))
                     .collect(Collectors.toList());
             studentDetail.setStudentsCourses(convertStudentCourses);
 
@@ -32,3 +34,4 @@ public class StudentConverter {
         return studentDetails;
     }
 }
+

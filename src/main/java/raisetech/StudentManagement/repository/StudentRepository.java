@@ -22,19 +22,37 @@ public interface StudentRepository {
      * @return　全件検索した受講生情報の一覧
      */
 
+    @Select("SELECT * FROM students WHERE id = #{id}")
+    Student searchStudent(String id);
 
     @Select("SELECT * FROM students")
     List<Student> search();
 
     @Select("SELECT * FROM students_courses")
-    List<StudentsCourses> searchStudentsCourses();
+    List<StudentsCourses> searchStudentsCoursesList();
 
-    @Insert(
-            "INSERT INTO students(name, fullname, nickname, email_address, address, age, gender, remark, isDeleted) "
+    @Select("SELECT * FROM students_courses WHERE student_id = #{studentId}")
+    List<StudentsCourses> searchStudentsCourses(String  studentId);
+
+
+    @Insert("INSERT INTO students(name, fullname, nickname, email_address, address, age, gender, remark, isDeleted) "
       + "VALUES(#{name}, #{fullname}, #{nickname}, #{emailAddress}, #{address}, #{age}, #{gender}, #{remark}, false )")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void registerStudent(Student student);
+    void
+    registerStudent(Student student);
 
+    @Insert("INSERT INTO students_courses(student_id,  courses_name,  start_date,  end_date)"
+        + "VALUES(#{studentId}, #{coursesName}, #{startDate}, #{endDate})")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    void registerStudentsCourses(StudentsCourses studentsCourses);
+
+    @Update("UPDATE students SET name = #{name}, fullname = #{fullname}, nickname = #{nickname}, email_address = #{emailAddress}, "
+            + "address = #{address}, age = #{age}, gender = #{gender}, remark = #{remark}, isDeleted = #{isDeleted} WHERE id = #{id}")
+    void updateStudent(Student student);
+
+    @Update("UPDATE students_courses SET courses_name = #{coursesName} WHERE id = #{id}")
+    void updateStudentsCourses(StudentsCourses studentsCourses);
+}
 
 
 
@@ -56,4 +74,3 @@ public interface StudentRepository {
 //     */
 //    @Select("SELECT * FROM students_courses WHERE courses_name LIKE CONCAT('%', #{keyword}, '%')")
 //    List<StudentsCourses>searchByName(String keyword);
-}
