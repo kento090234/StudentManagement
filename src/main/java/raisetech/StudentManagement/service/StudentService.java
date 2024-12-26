@@ -1,16 +1,20 @@
-package  raisetech.studentmanagement.service;
+package raisetech.StudentManagement.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import raisetech.studentmanagement.repository.StudentRepository;
-import raisetech.studentmanagement.data.Student;
-import raisetech.studentmanagement.data.StudentsCourses;
+import org.springframework.transaction.annotation.Transactional;
+import raisetech.StudentManagement.domain.StudentDetail;
+import raisetech.StudentManagement.repository.StudentRepository;
+import raisetech.StudentManagement.data.Student;
+import raisetech.StudentManagement.data.StudentsCourses;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private StudentRepository repository;
+
+    private final StudentRepository repository;
 
 
     @Autowired
@@ -18,33 +22,40 @@ public class StudentService {
         this.repository = repository;
     }
 
-
     public List<Student> searchStudentList() {
-
         return repository.search();
     }
 
     public List<StudentsCourses> searchStudentsCoursesList() {
-        return repository.searchStudentsCourses();
-
+        return repository.searchStudentsCoursesList();
     }
 
-//    /**
-//     * 年齢が30代の受講生を取得します。
-//     *
-//     * @return 年齢が30代の受講生一覧
-//     */
-//
-//     30代以上の学生を抽出するメソッド
-//    public List<Student> searchStudentsInTheirThirtiesOrOlder() {
-//         全学生を取得し、年齢が30歳以上の学生のみを抽出
-//        return repository.search().stream()
-//                .filter(student -> student.getAge() >= 30)  // 年齢が30歳以上の学生をフィルタリング
-//                .collect(Collectors.toList());              // フィルタリング後のリストを返す
-//    }
-//
-//     "Python" を含むコースを抽出
-//    public List<StudentsCourses> searchByName(String keyword) {
-//        return repository.searchByName(keyword);
-//    }
+    public StudentDetail searchStudent(String id) {
+        Student student = repository.searchStudent(id);
+        List<StudentsCourses> studentsCourses = repository.searchStudentsCourses(String.valueOf(student.getId()));
+        StudentDetail studentDetail = new StudentDetail();
+        studentDetail.setStudent(student);
+        studentDetail.setStudentsCourses(studentsCourses);
+        return studentDetail;
+    }
+
+    @Transactional
+    public void registerStudent(StudentDetail studentDetail) {
+        repository.registerStudent(studentDetail.getStudent());
+        for (StudentsCourses studentsCourses : studentDetail.getStudentsCourses()) {
+            studentsCourses.setStudentId(studentDetail.getStudent().getId()); // そのままセット
+            studentsCourses.setStartDate(LocalDateTime.now());
+            studentsCourses.setEndDate(LocalDateTime.now().plusYears(1));
+            repository.registerStudentsCourses(studentsCourses);
+        }
+    }
+
+    @Transactional
+    public void updateStudent(StudentDetail studentDetail) {
+        repository.updateStudent(studentDetail.getStudent());
+        for (StudentsCourses studentsCourse : studentDetail.getStudentsCourses()) {
+            repository.updateStudentsCourses(studentsCourse);
+        }
+    }
+
 }

@@ -1,9 +1,9 @@
-package raisetech.studentmanagement.domain;
+package raisetech.StudentManagement.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import raisetech.studentmanagement.data.Student;
-import raisetech.studentmanagement.data.StudentsCourses;
+import raisetech.StudentManagement.data.Student;
+import raisetech.StudentManagement.data.StudentsCourses;
 
 import java.util.List;
 
@@ -14,9 +14,6 @@ public class StudentDetail {
 
     private Student student;
     private List<StudentsCourses> studentsCourses;
-
     private String remark;
     private boolean isDeleted;
-
-
 }
